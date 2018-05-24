@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="wifi_modes_array">
+        <item>@string/wifiOn_label</item>
+        <item>@string/wifiOff_label</item>
+        <item>@string/do_nothing</item>
+    </string-array>
+
+    <string-array name="data_modes_array">
+        <item>@string/dataOn_label</item>
+        <item>@string/dataOff_label</item>
+        <item>@string/do_nothing</item>
+    </string-array>
+
+    <string-array name="bluetooth_modes_array">
+        <item>@string/bluetoothOn_label</item>
+        <item>@string/bluetoothOff_label</item>
+        <item>@string/do_nothing</item>
+    </string-array>
+
+
+    <string-array name="days_array">
+        <item>@string/monday</item>
+        <item>@string/tuesday</item>
+        <item>@string/wednesday</item>
+        <item>@string/thursday</item>
+        <item>@string/friday</item>
+        <item>@string/saturday</item>
+        <item>@string/sunday</item>
+    </string-array>
+</resources>
