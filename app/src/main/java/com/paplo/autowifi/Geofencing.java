@@ -15,6 +15,7 @@ import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +57,13 @@ public class Geofencing implements ResultCallback {
             return;
         }
         try {
-            mGeofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent());
-            Log.d(TAG, "Geofences registered");
+            mGeofencingClient.addGeofences(getGeofencingRequest(), getGeofencePendingIntent()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d(TAG, "Geofences registered");
+                }
+            });
+
             /*LocationServices.GeofencingApi.addGeofences(
                     mGoogleApiClient,
                     getGeofencingRequest(),

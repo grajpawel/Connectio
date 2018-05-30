@@ -233,12 +233,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public void onAddPlaceButtonClicked(View view) {
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        if (nm != null && Build.VERSION.SDK_INT >= 24 && !nm.isNotificationPolicyAccessGranted()) {
-            Snackbar snackbar = Snackbar.make(findViewById(R.id.coordinator), R.string.need_notification_permission_message, Snackbar.LENGTH_LONG);
-            snackbar.setAction(R.string.action_settings_label, new SettingsListener());
-            snackbar.show();
-            return;
-        }
+
         if (placeNum <= 100) {
             Intent intent = new Intent(this, PickerActivity.class);
             startActivity(intent);
