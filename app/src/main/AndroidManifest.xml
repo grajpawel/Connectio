@@ -24,7 +24,7 @@
         android:theme="@style/AppTheme">
     <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyB0PRU6UfbPhTR_22XsuT6DY_d1rKXMnhw"/>
+        android:value="AIzaSyCmCrq3LfFWGANmVevCa0TqrxD4R3Mr5Lk"/>
 
 
     <activity
@@ -85,7 +85,9 @@
             <category android:name="android.intent.category.DEFAULT" />
         </intent-filter>
     </receiver>
-    <receiver android:name=".GeofenceBroadcastReceiver" />
+    <receiver android:name=".GeofenceBroadcastReceiver"
+        android:enabled="true"
+        android:exported="true"/>
 
     <service
         android:name=".GeofenceTransitionsJobIntentService"

@@ -24,7 +24,7 @@ public class Geofencing implements ResultCallback {
 
     // Constants
     private static final String TAG = Geofencing.class.getSimpleName();
-    private static final long GEOFENCE_TIMEOUT = 24 * 60 * 60 * 1000; // 24 hours
+    private static final long GEOFENCE_TIMEOUT = 24 * 60 * 60 * 10000; // 24 hours
 
     private List<Geofence> mGeofenceList;
     private PendingIntent mGeofencePendingIntent;
