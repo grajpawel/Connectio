@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.location.Address;
 import android.location.Geocoder;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
 import com.paplo.autowifi.provider.PlaceContract;
 
@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 
 /**
@@ -32,12 +33,8 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.Plac
     private Context mContext;
     private PlaceBuffer mPlaces;
     private List<String> placeNames;
-    private Geocoder geocoder;
     private List<Address> addresses;
     public static String activeId;
-    public static String activePlaceName;
-    public static String activePlaceAddress;
-
 
 
     PlaceListAdapter (Context context, PlaceBuffer places){
@@ -46,8 +43,9 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.Plac
     }
 
 
+    @NonNull
     @Override
-    public PlaceViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PlaceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         final View view = inflater.inflate(R.layout.item_place_card, parent, false);
         Uri uri = PlaceContract.PlaceEntry.CONTENT_URI;
@@ -71,9 +69,9 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.Plac
     }
 
     @Override
-    public void onBindViewHolder(final PlaceViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final PlaceViewHolder holder, int position) {
         addresses = null;
-        geocoder = new Geocoder(mContext, Locale.getDefault());
+        Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
         try {
             addresses = geocoder.getFromLocation(mPlaces.get(position).getLatLng().latitude, mPlaces.get(position).getLatLng().longitude, 1);
         } catch (IOException e) {
@@ -112,7 +110,7 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.Plac
         String[] placeInfo = new String[2];
         if (placeNameFromDb != null && !placeNameFromDb.isEmpty()){
             placeInfo[0] = placeNameFromDb;
-            placeInfo[1] = mPlaces.get(position).getAddress().toString();
+            placeInfo[1] = Objects.requireNonNull(mPlaces.get(position).getAddress()).toString();
         } else {
             if (addresses != null){
                 if (addresses.get(0).getThoroughfare() != null) {
@@ -130,7 +128,7 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.Plac
                 }
             } else {
                 placeInfo[0] = mPlaces.get(position).getName().toString();
-                placeInfo[1] = mPlaces.get(position).getAddress().toString();
+                placeInfo[1] = Objects.requireNonNull(mPlaces.get(position).getAddress()).toString();
 
             }
         }
@@ -158,7 +156,7 @@ public class PlaceListAdapter extends RecyclerView.Adapter<PlaceListAdapter.Plac
         TextView nameTextView;
         TextView addressTextView;
 
-        public PlaceViewHolder(View itemView) {
+        PlaceViewHolder(View itemView) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.name_text_view);
             addressTextView = itemView.findViewById(R.id.address_text_view);

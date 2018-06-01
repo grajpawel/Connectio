@@ -1,17 +1,14 @@
 package com.paplo.autowifi;
 
-import android.Manifest;
 import android.app.DialogFragment;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Debug;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -19,7 +16,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -28,9 +24,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CheckedTextView;
@@ -46,7 +40,6 @@ import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.common.primitives.Booleans;
 import com.paplo.autowifi.provider.PlaceContract;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Formatter;
 import java.util.Locale;
@@ -59,7 +52,6 @@ public class PickerActivity extends AppCompatActivity {
 
 
     public String enterOptionsString = "222";
-    public String exitOptionsString = "222";
     public char[] enterOptions = new char[3];
     public char[] exitOptions = new char[3];
     private static final int PLACE_PICKER_REQUEST = 1;
@@ -94,7 +86,6 @@ public class PickerActivity extends AppCompatActivity {
         showNotifications = false;
         addressLinearLayout = findViewById(R.id.address_linear_layout);
         addressLinearLayout.setVisibility(View.GONE);
-        LinearLayout timeConstraintsLinearLayout = findViewById(R.id.time_constraints_detail);
 
         TextView dayTextView = findViewById(R.id.active_day_text_view);
         TextView startTimeTextView = findViewById(R.id.start_time_text_view);
@@ -366,7 +357,7 @@ public class PickerActivity extends AppCompatActivity {
 
 
                         Log.d(TAG, "Final days: " + TextUtils.join("_,_", dayUserArray));
-                        String dayString = "";
+                        StringBuilder dayString = new StringBuilder();
                         String[] dayArray = getResources().getStringArray(R.array.days_array);
                         int run = 0;
 
@@ -374,23 +365,23 @@ public class PickerActivity extends AppCompatActivity {
 
                         for (int i = 0; i < dayUserArray.length; i++){
                             if (dayUserArray[i]){
-                                dayString = dayString + dayArray[i].substring(0, 3)  + ", " ;
+                                dayString.append(dayArray[i].substring(0, 3)).append(", ");
                                 run ++;
                             }
                         }
 
-                        if (dayString.isEmpty()){
-                            dayString = getString(R.string.never);
+                        if (dayString.length() == 0){
+                            dayString = new StringBuilder(getString(R.string.never));
                         } else {
                             if (run == 7){
-                                dayString = getString(R.string.everyday);
+                                dayString = new StringBuilder(getString(R.string.everyday));
                             } else {
-                                dayString = dayString.substring(0, dayString.length() - 2);
+                                dayString = new StringBuilder(dayString.substring(0, dayString.length() - 2));
                             }
                         }
                         TextView dayTextView = findViewById(R.id.active_day_text_view);
                         if (dayTextView != null)
-                        dayTextView.setText(dayString);
+                        dayTextView.setText(dayString.toString());
 
 
 

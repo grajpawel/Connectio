@@ -69,8 +69,6 @@
             android:value=".MainActivity" />
     </activity>
 
-    <service android:name=".GeofenceService" />
-
     <provider
         android:name=".provider.PlaceContentProvider"
         android:authorities="com.paplo.autowifi"

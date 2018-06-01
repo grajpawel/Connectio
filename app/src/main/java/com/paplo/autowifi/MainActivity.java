@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Build;
@@ -27,7 +25,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -35,7 +32,6 @@ import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.PendingResults;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.LocationServices;
@@ -43,12 +39,10 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlacePicker;
-import com.paplo.autowifi.provider.PlaceContentProvider;
 import com.paplo.autowifi.provider.PlaceContract;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
@@ -231,7 +225,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
 
     public void onAddPlaceButtonClicked(View view) {
-        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
 
         if (placeNum <= 100) {
@@ -373,17 +366,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         detailIntent.putExtra("placeAddress", addressTextView.getText().toString());
         startActivity(detailIntent);
     }
-
-
-    public class SettingsListener implements View.OnClickListener{
-
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
-            startActivity(intent);
-        }
-    }
-
 
 
     public void updateLayout(final int geofencetransition, final String geofenceId){

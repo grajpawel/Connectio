@@ -15,7 +15,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -55,7 +54,6 @@ public class DetailActivity extends AppCompatActivity {
     public char[] exitOptions = new char[3];
     private static int finalRadius;
     private static String userPlaceName;
-    private static boolean placeAdded = false;
     private static boolean undoAfterTime;
     private LinearLayout addressLinearLayout;
     private Boolean[] dayUserArray = new Boolean[7];
@@ -85,7 +83,10 @@ public class DetailActivity extends AppCompatActivity {
     private TextView dayTextView;
     public static long startLong;
     public static long endLong;
-    public Place activePlace;
+
+    public DetailActivity(LinearLayout addressLinearLayout) {
+        this.addressLinearLayout = addressLinearLayout;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -361,7 +362,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
                         Log.d(TAG, "Final days: " + TextUtils.join("_,_", dayUserArray));
-                        String dayString = "";
+                        StringBuilder dayString = new StringBuilder();
                         String[] dayArray = getResources().getStringArray(R.array.days_array);
                         int run = 0;
 
@@ -369,23 +370,23 @@ public class DetailActivity extends AppCompatActivity {
 
                         for (int i = 0; i < dayUserArray.length; i++){
                             if (dayUserArray[i]){
-                                dayString = dayString + dayArray[i].substring(0, 3)  + ", " ;
+                                dayString.append(dayArray[i].substring(0, 3)).append(", ");
                                 run ++;
                             }
                         }
 
-                        if (dayString.isEmpty()){
-                            dayString = getString(R.string.never);
+                        if (dayString.length() == 0){
+                            dayString = new StringBuilder(getString(R.string.never));
                         } else {
                             if (run == 7){
-                                dayString = getString(R.string.everyday);
+                                dayString = new StringBuilder(getString(R.string.everyday));
                             } else {
-                                dayString = dayString.substring(0, dayString.length() - 2);
+                                dayString = new StringBuilder(dayString.substring(0, dayString.length() - 2));
                             }
                         }
                         TextView dayTextView = findViewById(R.id.active_day_text_view);
                         if (dayTextView != null)
-                            dayTextView.setText(dayString);
+                            dayTextView.setText(dayString.toString());
 
 
 
@@ -537,7 +538,6 @@ public class DetailActivity extends AppCompatActivity {
                 acceptButton.setVisibility(View.VISIBLE);
 
             }
-            placeAdded = true;
 
             TextView placeNameTextView = findViewById(R.id.name_text_view);
             TextView placeAddressTextView = findViewById(R.id.address_text_view);
@@ -686,7 +686,7 @@ public class DetailActivity extends AppCompatActivity {
 
     public void setDayTextView(){
 
-        String dayString = "";
+        StringBuilder dayString = new StringBuilder();
         String[] dayArray = getResources().getStringArray(R.array.days_array);
         int run = 0;
 
@@ -694,22 +694,22 @@ public class DetailActivity extends AppCompatActivity {
 
         for (int i = 0; i < dayUserArray.length; i++){
             if (dayUserArray[i]){
-                dayString = dayString + dayArray[i].substring(0, 3)  + ", " ;
+                dayString.append(dayArray[i].substring(0, 3)).append(", ");
                 run ++;
             }
         }
 
-        if (dayString.isEmpty()){
-            dayString = getString(R.string.never);
+        if (dayString.length() == 0){
+            dayString = new StringBuilder(getString(R.string.never));
         } else {
             if (run == 7){
-                dayString = getString(R.string.everyday);
+                dayString = new StringBuilder(getString(R.string.everyday));
             } else {
-                dayString = dayString.substring(0, dayString.length() - 2);
+                dayString = new StringBuilder(dayString.substring(0, dayString.length() - 2));
             }
         }
 
-        dayTextView.setText(dayString);
+        dayTextView.setText(dayString.toString());
 
     }
 

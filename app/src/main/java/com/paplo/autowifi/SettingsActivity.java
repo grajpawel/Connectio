@@ -1,14 +1,7 @@
 package com.paplo.autowifi;
 
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -45,21 +38,9 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void onRingerPermissionClicked(View view) {
-        Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-        startActivity(intent);
-    }
-
     @Override
     public void onResume() {
         super.onResume();
-
-        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.shared_preferences_key), MODE_PRIVATE);
-        boolean createNotifications = sharedPreferences.getBoolean(getString(R.string.notifications_key), true);
-        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
-
 
 
         // Initialize location permissions checkbox
