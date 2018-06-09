@@ -84,8 +84,12 @@ public class DetailActivity extends AppCompatActivity {
     public static long startLong;
     public static long endLong;
 
-    public DetailActivity(LinearLayout addressLinearLayout) {
-        this.addressLinearLayout = addressLinearLayout;
+    //public DetailActivity(LinearLayout addressLinearLayout) {
+        //this.addressLinearLayout = addressLinearLayout;
+    //}
+
+    public DetailActivity(){
+
     }
 
     @Override
