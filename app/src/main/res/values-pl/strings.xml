@@ -64,6 +64,10 @@
     <string name="undo_changes">Cofnij zmiany po upływie czasu</string>
     <string name="you_entered_without_name">Zmieniono ustawienia</string>
     <string name="you_entered">Jestes w </string>
+    <string name="place_added">Miejsce dodane</string>
+    <string name="place_deleted">Miejsce usunięte</string>
+    <string name="place_changed">Miejsce zmienione</string>
+
 
     <string name="action_save">Zapisz</string>
     <string name="action_accept">Akceptuj</string>
@@ -73,19 +77,6 @@
     <string name="active_place">Aktywne miejsce</string>
     <string name="no_internet">Do tego potrzebny jest dostęp do internetu</string>
     <string name="geofence_limit_reached">Najpierw usuń jedno ze swoich miejsc</string>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </resources>

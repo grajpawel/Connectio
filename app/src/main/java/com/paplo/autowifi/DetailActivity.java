@@ -31,6 +31,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -189,6 +190,8 @@ public class DetailActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_delete) {
             db.delete(PlaceContract.PlaceEntry.TABLE_NAME, "placeID=?", new String[]{placeId});
+            Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.place_deleted), Toast.LENGTH_SHORT);
+            toast.show();
             returnToMain();
             return true;
         } else if (id == R.id.action_save){
@@ -232,6 +235,9 @@ public class DetailActivity extends AppCompatActivity {
         contentValues.put(PlaceContract.PlaceEntry.COLUMN_PLACE_END_TIME, endTimeLong);
 
         db.update(PlaceContract.PlaceEntry.TABLE_NAME, contentValues, "placeID='"+placeId+"'", null);
+
+        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.place_changed), Toast.LENGTH_SHORT);
+        toast.show();
 
         returnToMain();
 

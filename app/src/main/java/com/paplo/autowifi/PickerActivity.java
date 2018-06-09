@@ -32,6 +32,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -222,6 +223,9 @@ public class PickerActivity extends AppCompatActivity {
         contentValues.put(PlaceContract.PlaceEntry.COLUMN_PLACE_START_TIME, startTimeLong);
         contentValues.put(PlaceContract.PlaceEntry.COLUMN_PLACE_END_TIME, endTimeLong);
         getContentResolver().insert(PlaceContract.PlaceEntry.CONTENT_URI, contentValues);
+
+        Toast toast = Toast.makeText(getApplicationContext(), getString(R.string.place_added), Toast.LENGTH_SHORT);
+        toast.show();
 
 
         Intent intent = new Intent(this, MainActivity.class);
